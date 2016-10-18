@@ -21,15 +21,21 @@ module.exports = React.createClass({
     console.log(item)
     this.setState({items})
   },
+  addNewsItem: function (newItem) {
+    newItem.id = this.state.items.length + 1
+    this.setState({
+      items: this.state.items.concat([newItem])
+    })
+  },
   render() {
     return h('div.pa4.bg-green.vh-100', [
-     h(Header, { title: "Cam's Code News!"}),
-     h('main', [
-       h(List, { items:
-         this.state.items, onScoreChange: this.scoreChanged
-       }),
-       h(Form)
-     ])
+      h(Header, { title: "Cam's Code News!"}),
+      h('main', [
+        h(List, { items: this.state.items,
+          onScoreChange: this.scoreChanged
+        }),
+        h(Form, { addNewsItem: this.addNewsItem })
+      ])
     ])
   }
 })
